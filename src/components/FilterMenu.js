@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
 	makeStyles,
 	withStyles,
@@ -8,8 +8,8 @@ import {
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
-import Slide from '@material-ui/core/Slide';
-import zIndex from '@material-ui/core/styles/zIndex';
+import Locations from './Locations';
+import SetNumberOfGuest from './SetNumberOfGuest';
 
 const theme = createMuiTheme({
 	palette: {
@@ -18,57 +18,129 @@ const theme = createMuiTheme({
 		},
 	},
 });
+
+// const Overlay = () =>{
+//     const classes = useStyles();
+
+//     return(
+//
+//     )
+//   }
+
 const FilterMenu = () => {
 	const classes = useStyles();
+	// const searchInput = useRef(null)
+	const [isFocus, setIsFocus] = useState(false);
+	const [isFocusGuest, setIsFocusGuest] = useState(false);
+	const [locationInput, setLocationInput] = useState('');
+	const [count, setCount] = useState(0);
+	const [count2, setCount2] = useState(0);
+	const handleCount = (value) => {
+		setCount(count + value);
+		console.log(count);
+	};
+	const handleCount2 = (value) => {
+		setCount2(count2 + value);
+		console.log(count2);
+	};
+
+	const onFocus = (e) => {
+		setIsFocus(true);
+		setIsFocusGuest(false);
+	};
+	const onFocusGuest = (e) => {
+		setIsFocusGuest(true);
+		setIsFocus(false);
+	};
+
+	const onBlur = () => {
+		setIsFocusGuest(false);
+	};
+	const onBlurGuest = () => {
+		setIsFocus(false);
+	};
+
+	const handleClick = (e) => {
+		setLocationInput(e.target.innerText);
+	};
+	const handleChange = (e) => {
+		setLocationInput(e.target.value);
+	};
+
+	// const total = () => {
+	// 	console.log(count + count2);
+	// };
+	// total();
 
 	return (
-		<div className={classes.filterWrapper}>
-			<Box>
-				<form className={classes.form}>
-					<div className={classes.wrapper}>
-						<div className={classes.inner_div}>
-							{/* <TextField id="location-input" label="Location" variant="filled" placeholder="Add location" 
-                              defaultValue='' 
-                               InputProps={{ classes, disableUnderline: true }}
-                             /> */}
-							<label htmlFor='location' className={classes.label}>
-								Location
-							</label>
-							<input
-								type='text'
-								name='location'
-								id='location'
-								placeholder='Add location'
-								className={classes.input}
-							/>
-						</div>
-						<div className={classes.guest_wrapper}>
-							{/* <TextField id="guest-input" label="Guest" variant="filled"
+		<div className={classes.overlay}>
+			<div className={classes.filterWrapper}>
+				<Box>
+					<form className={classes.form}>
+						<div className={classes.wrapper}>
+							<div className='locationWrapper'>
+								<div className={classes.inner_div}>
+									<label htmlFor='location' className={classes.label}>
+										Location
+									</label>
+									<input
+										type='text'
+										name='location'
+										id='location'
+										placeholder='Add location'
+										className={classes.input}
+										onFocus={onFocus}
+										onBlur={onBlur}
+										value={locationInput}
+										onChange={handleChange}
+									/>
+								</div>
+							</div>
+
+							<div className={classes.guest_wrapper}>
+								{/* <TextField id="guest-input" label="Guest" variant="filled"
                              defaultValue='' 
                              placeholder="Add Guest"
                                InputProps={{ classes, disableUnderline: true }} /> */}
-							<label htmlFor='guest'  className={classes.label}>
-								Guest
-							</label>
-							<input
-								type='text'
-								name='location'
-								id='guest'
-								placeholder='Add Guest'
-								className={classes.input}
-							/>
+								<label htmlFor='guest' className={classes.label}>
+									Guest
+								</label>
+								<input
+									type='text'
+									name='location'
+									id='guest'
+									placeholder='Add Guest'
+									className={classes.input}
+									onFocus={onFocusGuest}
+									onBlur={onBlurGuest}
+									value='9 guests'
+								/>
+							</div>
+							<div className={classes.buttonWrapper}>
+								<Button
+									variant='contained'
+									className={classes.button}
+									startIcon={<SearchIcon />}>
+									Search
+								</Button>
+							</div>
 						</div>
-						<div className={classes.buttonWrapper}>
-							<Button
-								variant='contained'
-								className={classes.button}
-								startIcon={<SearchIcon/>}>
-								Search
-							</Button>
-						</div>
-					</div>
-				</form>
-			</Box>
+					</form>
+					{isFocus === true ? <Locations onclick={handleClick} /> : ''}
+				</Box>
+				<div className={classes.resultWrapper}>
+					{isFocusGuest === true ? (
+						<SetNumberOfGuest
+							count={count}
+							count2={count2}
+							handleCount={handleCount}
+							handleCount2={handleCount2}
+						/>
+					) : (
+						''
+					)}
+				</div>
+			</div>
 		</div>
 	);
 };
@@ -76,6 +148,17 @@ const FilterMenu = () => {
 export default FilterMenu;
 
 const useStyles = makeStyles((theme) => ({
+	' @keyframes fadeInDownBig': {
+		'0%': {
+			opacity: 0,
+			transform: 'translate3d(0, -2000px, 0)',
+		},
+
+		'100%': {
+			opacity: 1,
+			transform: 'translate3d(0, 0, 0)',
+		},
+	},
 	filterWrapper: {
 		position: 'absolute',
 		display: 'block',
@@ -85,8 +168,10 @@ const useStyles = makeStyles((theme) => ({
 		color: '#333',
 		height: '70vh',
 		background: '#fff',
-		zIndex: 2000,
+		zIndex: 3000,
 		padding: '5rem',
+		animation: 'fadeInDownBig',
+
 		//    '&::before':{
 		//               content:"",
 		//               backgroundColor: 'rgba(0, 0, 0, 0.9)',
@@ -101,6 +186,15 @@ const useStyles = makeStyles((theme) => ({
 		//               transition:'all 0.3s',
 
 		//     }
+	},
+	overlay: {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		height: '100%',
+		width: '100%',
+		backgroundColor: 'rgba(0,0,0,0.5)',
+		zIndex: 2000,
 	},
 	wrapper: {
 		display: 'flex',
@@ -160,19 +254,19 @@ const useStyles = makeStyles((theme) => ({
 			borderRadius: 16,
 		},
 	},
-  button:{
-    marginRight:'9rem',
-    marginLeft:'10rem',
-    marginTop:'0.5rem',
-     width:126,
-    borderRadius:16,
-    textTransform:'capitalize',
-    background: 'rgba(235, 87, 87, 0.9)',
-    color:'#fff',
-    '&:hover':{
-      background: 'rgba(235, 87, 89, 0.9)'
-    }
-  },
+	button: {
+		marginRight: '9rem',
+		marginLeft: '10rem',
+		marginTop: '0.5rem',
+		width: 126,
+		borderRadius: 16,
+		textTransform: 'capitalize',
+		background: 'rgba(235, 87, 87, 0.9)',
+		color: '#fff',
+		'&:hover': {
+			background: 'rgba(235, 87, 89, 0.9)',
+		},
+	},
 	input: {
 		border: 'none',
 		outline: '0',
@@ -188,31 +282,9 @@ const useStyles = makeStyles((theme) => ({
 		color: '#333',
 		// transform:'translate(16px, 0) scale(1)'
 	},
-	// root:{
-	//   border: '1px solid #e2e2e1',
-	//   overflow: 'hidden',
-	//   // borderRadius: 16,
-	//   backgroundColor: '#fcfcfb',
-	//   width:'350px',
-	//   height:'40px',
-	//   fontSize:'0.9rem',
-	//   boxShadow: `${fade(theme.palette.primary.main, 0.1)} 0 0 0 1px`,
-
-	//   transition: theme.transitions.create(['border-color', 'box-shadow']),
-	//   '&:hover': {
-	//     backgroundColor: '#fff',
-	//   },
-	//   '&$focused': {
-	//     backgroundColor: '#fff',
-	//     borderColor: '#000',
-
-	//   },
-	// },
-	// focused:{},
-	// label:{
-	//   color:"#000 !important",
-	//   fontWeight:500,
-	// },
+	resultWrapper: {
+		position: 'relative',
+	},
 }));
 
 // const StyledtextField = withStyles({
