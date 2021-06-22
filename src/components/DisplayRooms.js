@@ -13,7 +13,7 @@ const DisplayRooms = () => {
     const getData = async () =>{
       let res = await fetch ('stays.json')
         let stays =  await res.json()
-            stays.length = 6
+          stays.length = 6
          setData(stays)
           console.log(stays)
           

@@ -33,17 +33,22 @@ const FilterMenu = () => {
 	const [isFocus, setIsFocus] = useState(false);
 	const [isFocusGuest, setIsFocusGuest] = useState(false);
 	const [locationInput, setLocationInput] = useState('');
+	const [numberOfGuest, setNumberOfGuest] = useState(0);
 	const [count, setCount] = useState(0);
 	const [count2, setCount2] = useState(0);
+
 	const handleCount = (value) => {
 		setCount(count + value);
-		console.log(count);
+		// setNumberOfGuest(count);
+		// console.log(count);
 	};
 	const handleCount2 = (value) => {
 		setCount2(count2 + value);
-		console.log(count2);
+		// setNumberOfGuest(count);
+		// console.log(count2);
 	};
-
+	// console.log(handleCount);
+	// console.log(handleCount2);
 	const onFocus = (e) => {
 		setIsFocus(true);
 		setIsFocusGuest(false);
@@ -67,10 +72,23 @@ const FilterMenu = () => {
 		setLocationInput(e.target.value);
 	};
 
-	// const total = () => {
-	// 	console.log(count + count2);
+	const handleChangeGuest = (e) => {};
+
+	// let total = count + count2;
+	// const getTotal = () => {
+	// 	setNumberOfGuest(total);
 	// };
-	// total();
+	const totalCount = count + count2;
+	// const total = () => {
+
+	// 	setNumberOfGuest(totalCount);
+	// 	console.log(totalCount);
+	// };
+	const onSearch = (e) => {
+		e.preventDefault();
+		console.log(locationInput);
+		console.log(totalCount);
+	};
 
 	return (
 		<div className={classes.overlay}>
@@ -107,20 +125,23 @@ const FilterMenu = () => {
 								</label>
 								<input
 									type='text'
-									name='location'
+									name='guest'
 									id='guest'
 									placeholder='Add Guest'
 									className={classes.input}
 									onFocus={onFocusGuest}
 									onBlur={onBlurGuest}
-									value='9 guests'
+									value={totalCount}
+									onChange={handleChangeGuest}
 								/>
 							</div>
 							<div className={classes.buttonWrapper}>
 								<Button
 									variant='contained'
+									type='submit'
 									className={classes.button}
-									startIcon={<SearchIcon />}>
+									startIcon={<SearchIcon />}
+									onClick={onSearch}>
 									Search
 								</Button>
 							</div>
