@@ -1,26 +1,30 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useContext} from 'react'
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import StarIcon from '@material-ui/icons/Star';
-
+import RoomsContext from '../context/roomsContext';
 const DisplayRooms = () => {
     const classes = useStyles();
-    const[data,setData]= useState([]);
-    // console.log(stays)
-    const getData = async () =>{
-      let res = await fetch ('stays.json')
-        let stays =  await res.json()
-          stays.length = 6
-         setData(stays)
-          console.log(stays)
+    const roomsContext = useContext(RoomsContext)
+    const {getData, data} = roomsContext
+    // const[data,setData]= useState([]);
+    // // console.log(stays)
+    // const getData = async () =>{
+    //   let res = await fetch ('stays.json')
+    //     let stays =  await res.json()
+    //       stays.length = 6
+    //      setData(stays)
+    //       console.log(stays)
           
        
-     }
+    //  }
     useEffect(() => {
      getData()
+    
+    // eslint-disable-next-line
     }, [])
 
 

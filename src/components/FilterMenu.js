@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect,useContext } from 'react';
 import {
 	makeStyles,
 	withStyles,
@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
 import Locations from './Locations';
 import SetNumberOfGuest from './SetNumberOfGuest';
-
+import RoomsContext from '../context/roomsContext';
 const theme = createMuiTheme({
 	palette: {
 		primary: {
@@ -30,10 +30,13 @@ const theme = createMuiTheme({
 const FilterMenu = () => {
 	const classes = useStyles();
 	// const searchInput = useRef(null)
+	const roomsContext = useContext(RoomsContext)
+    const {getData, data} = roomsContext
+   
 	const [isFocus, setIsFocus] = useState(false);
 	const [isFocusGuest, setIsFocusGuest] = useState(false);
 	const [locationInput, setLocationInput] = useState('');
-	const [numberOfGuest, setNumberOfGuest] = useState(0);
+	// const [numberOfGuest, setNumberOfGuest] = useState(0);
 	const [count, setCount] = useState(0);
 	const [count2, setCount2] = useState(0);
 
@@ -87,7 +90,11 @@ const FilterMenu = () => {
 	const onSearch = (e) => {
 		e.preventDefault();
 		console.log(locationInput);
-		console.log(totalCount);
+		console.log(totalCount); 
+	console.log(data.filter((room)=>{  
+		// totalCount === room.maxGuests
+	return room.city.toLowerCase().includes(locationInput)})
+	)
 	};
 
 	return (
