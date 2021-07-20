@@ -1,24 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { makeStyles } from '@material-ui/core/styles';
+import { rooms } from '../stays.json';
+
 const Locations = ({ onclick }) => {
 	const classes = useStyles();
-
 	return (
 		<div className={classes.locationWrapper}>
 			<ul className={classes.ui}>
-				<li className={classes.li}>
-					<LocationOnIcon /> <p onClick={onclick}>Helsinki, Finland</p>
-				</li>
-				<li className={classes.li}>
-					<LocationOnIcon /> <p onClick={onclick}>Turku, Finland</p>
-				</li>
-				<li className={classes.li}>
-					<LocationOnIcon /> <p onClick={onclick}>Vaasa, Finland</p>
-				</li>
-				<li className={classes.li}>
-					<LocationOnIcon /> <p onClick={onclick}>Oulu, Finland</p>
-				</li>
+				{React.Children.toArray(
+					rooms.map((location) => (
+						<li className={classes.li}>
+							<LocationOnIcon />{' '}
+							<p onClick={onclick}>
+								{location.city},{location.country}
+							</p>
+						</li>
+					)),
+				)}
 			</ul>
 		</div>
 	);

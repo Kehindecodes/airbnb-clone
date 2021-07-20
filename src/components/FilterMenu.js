@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect,useContext } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import {
 	makeStyles,
 	withStyles,
@@ -11,6 +11,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Locations from './Locations';
 import SetNumberOfGuest from './SetNumberOfGuest';
 import RoomsContext from '../context/roomsContext';
+import FilterButton from './FilterButton';
 const theme = createMuiTheme({
 	palette: {
 		primary: {
@@ -27,29 +28,27 @@ const theme = createMuiTheme({
 //     )
 //   }
 
-const FilterMenu = () => {
+const FilterMenu = ({
+	onSearch,
+	totalCount,
+	count,
+	count2,
+	locationInput,
+	handleCount,
+	handleCount2,
+	handleChange,
+	handleClick,
+}) => {
 	const classes = useStyles();
 	// const searchInput = useRef(null)
-	const roomsContext = useContext(RoomsContext)
-    const {getData, data} = roomsContext
-   
+	const roomsContext = useContext(RoomsContext);
+	const { getData, data } = roomsContext;
+
 	const [isFocus, setIsFocus] = useState(false);
 	const [isFocusGuest, setIsFocusGuest] = useState(false);
-	const [locationInput, setLocationInput] = useState('');
-	// const [numberOfGuest, setNumberOfGuest] = useState(0);
-	const [count, setCount] = useState(0);
-	const [count2, setCount2] = useState(0);
 
-	const handleCount = (value) => {
-		setCount(count + value);
-		// setNumberOfGuest(count);
-		// console.log(count);
-	};
-	const handleCount2 = (value) => {
-		setCount2(count2 + value);
-		// setNumberOfGuest(count);
-		// console.log(count2);
-	};
+	// const [numberOfGuest, setNumberOfGuest] = useState(0);
+
 	// console.log(handleCount);
 	// console.log(handleCount2);
 	const onFocus = (e) => {
@@ -68,40 +67,24 @@ const FilterMenu = () => {
 		setIsFocus(false);
 	};
 
-	const handleClick = (e) => {
-		setLocationInput(e.target.innerText);
-	};
-	const handleChange = (e) => {
-		setLocationInput(e.target.value);
-	};
-
 	const handleChangeGuest = (e) => {};
 
 	// let total = count + count2;
 	// const getTotal = () => {
 	// 	setNumberOfGuest(total);
 	// };
-	const totalCount = count + count2;
+
 	// const total = () => {
 
 	// 	setNumberOfGuest(totalCount);
 	// 	console.log(totalCount);
 	// };
-	const onSearch = (e) => {
-		e.preventDefault();
-		console.log(locationInput);
-		console.log(totalCount); 
-	console.log(data.filter((room)=>{  
-		// totalCount === room.maxGuests
-	return room.city.toLowerCase().includes(locationInput)})
-	)
-	};
 
 	return (
 		<div className={classes.overlay}>
 			<div className={classes.filterWrapper}>
 				<Box>
-					<form className={classes.form}>
+					<form className={classes.form} onSubmit={onSearch}>
 						<div className={classes.wrapper}>
 							<div className='locationWrapper'>
 								<div className={classes.inner_div}>
@@ -143,14 +126,15 @@ const FilterMenu = () => {
 								/>
 							</div>
 							<div className={classes.buttonWrapper}>
-								<Button
+								{/* <Button
 									variant='contained'
 									type='submit'
 									className={classes.button}
 									startIcon={<SearchIcon />}
 									onClick={onSearch}>
 									Search
-								</Button>
+								</Button> */}
+								<FilterButton />
 							</div>
 						</div>
 					</form>
