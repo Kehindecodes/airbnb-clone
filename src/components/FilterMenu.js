@@ -38,6 +38,7 @@ const FilterMenu = ({
 	handleCount2,
 	handleChange,
 	handleClick,
+	close,
 }) => {
 	const classes = useStyles();
 	// const searchInput = useRef(null)
@@ -81,8 +82,14 @@ const FilterMenu = ({
 	// };
 
 	return (
-		<div className={classes.overlay}>
-			<div className={classes.filterWrapper}>
+		<div
+			className={classes.overlay}
+			onClick={() => {
+				close();
+			}}>
+			<div
+				className={classes.filterWrapper}
+				onClick={(e) => e.stopPropagation()}>
 				<Box>
 					<form className={classes.form} onSubmit={onSearch}>
 						<div className={classes.wrapper}>

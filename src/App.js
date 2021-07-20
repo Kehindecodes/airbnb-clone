@@ -7,7 +7,6 @@ import { rooms } from '././stays.json';
 import FilterMenu from './components/FilterMenu';
 
 function App() {
-	const ref = useRef(null);
 	const [stays, setStays] = useState(rooms);
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -41,22 +40,18 @@ function App() {
 	};
 
 	const closeFilterMenu = (e) => {
-		if (ref.current && !ref.current.contains(e.target)) {
-			e.preventDefault();
-			setIsOpen(false);
-			console.log('you just click the body');
-		}
+		setIsOpen(false);
 	};
 
-	useEffect(() => {
-		document.addEventListener('click', closeFilterMenu);
+	// useEffect(() => {
+	// 	document.addEventListener('click', closeFilterMenu);
 
-		// clean up
-		return () => {
-			document.removeEventListener('click', closeFilterMenu);
-		};
-	}, [ref]);
-
+	// 	// clean up
+	// 	return () => {
+	// 		document.removeEventListener('click', closeFilterMenu);
+	// 	};
+	// }, [ref]);
+	console.log(rooms);
 	const onSearch = (e) => {
 		e.preventDefault();
 		console.log(totalCount);
@@ -64,11 +59,17 @@ function App() {
 		const filteredData = rooms.filter(
 			(room) => room.maxGuests === totalCount || room.city === locationInput,
 		);
+
 		console.log(filteredData);
-		setStays(filteredData);
+
+		if (locationInput === '' && totalCount === 0) {
+			setStays(stays);
+		} else {
+			setStays(filteredData);
+		}
 	};
 	return (
-		<>
+		<div>
 			<Header clicks={openFilterMenu} />
 			{isOpen === true ? (
 				<FilterMenu
@@ -81,12 +82,13 @@ function App() {
 					handleCount2={handleCount2}
 					handleChange={handleChange}
 					handleClick={handleClick}
+					close={closeFilterMenu}
 				/>
 			) : (
 				''
 			)}
-			<DisplayRooms stays={stays} refs={ref} />
-		</>
+			<DisplayRooms stays={stays} onClick={closeFilterMenu} />
+		</div>
 	);
 }
 
