@@ -30,7 +30,7 @@ function App() {
 	const handleChange = (e) => {
 		setLocationInput(e.target.value);
 	};
-	rooms.length = 6;
+
 	// useEffect(() => {
 	// 	filteredRooms.length = 6;
 	// }, []);
@@ -40,28 +40,30 @@ function App() {
 		console.log('bro it is working ');
 	};
 
-	// const closeFilterMenu = (e) => {
-	// 	if (ref.current && !ref.current.contains(e.target)) {
-	// 		e.preventDefault();
-	// 		setIsOpen(false);
-	// 		console.log('you just click the body');
-	// 	}
-	// };
+	const closeFilterMenu = (e) => {
+		if (ref.current && !ref.current.contains(e.target)) {
+			e.preventDefault();
+			setIsOpen(false);
+			console.log('you just click the body');
+		}
+	};
 
-	// useEffect(() => {
-	// 	document.addEventListener('click', closeFilterMenu);
+	useEffect(() => {
+		document.addEventListener('click', closeFilterMenu);
 
-	// 	// clean up
-	// 	return () => {
-	// 		document.removeEventListener('click', closeFilterMenu);
-	// 	};
-	// }, [ref]);
+		// clean up
+		return () => {
+			document.removeEventListener('click', closeFilterMenu);
+		};
+	}, [ref]);
 
 	const onSearch = (e) => {
 		e.preventDefault();
 		console.log(totalCount);
 		// const filterd = filteredRooms.filter((d) => d.maxGuests === 9);
-		const filteredData = rooms.filter((room) => room.maxGuests === totalCount);
+		const filteredData = rooms.filter(
+			(room) => room.maxGuests === totalCount || room.city === locationInput,
+		);
 		console.log(filteredData);
 		setStays(filteredData);
 	};
@@ -83,7 +85,7 @@ function App() {
 			) : (
 				''
 			)}
-			<DisplayRooms stays={stays} />
+			<DisplayRooms stays={stays} refs={ref} />
 		</>
 	);
 }

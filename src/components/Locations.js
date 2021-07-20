@@ -5,16 +5,21 @@ import { rooms } from '../stays.json';
 
 const Locations = ({ onclick }) => {
 	const classes = useStyles();
+	function getUniqueValues(array, property) {
+		const propValues = array.map((element) => element[property]);
+		const uniqueValues = new Set(propValues);
+		const uniqueValuesArray = [...uniqueValues];
+		return uniqueValuesArray;
+	}
+	const stays = getUniqueValues(rooms, 'city');
+
 	return (
 		<div className={classes.locationWrapper}>
 			<ul className={classes.ui}>
 				{React.Children.toArray(
-					rooms.map((location) => (
+					stays.map((location) => (
 						<li className={classes.li}>
-							<LocationOnIcon />{' '}
-							<p onClick={onclick}>
-								{location.city},{location.country}
-							</p>
+							<LocationOnIcon /> <p onClick={onclick}>{location}</p>
 						</li>
 					)),
 				)}
