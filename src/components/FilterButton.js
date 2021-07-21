@@ -22,12 +22,16 @@ const useStyles = makeStyles(() => ({
 		marginLeft: '10rem',
 		marginTop: '0.5rem',
 		width: 126,
+		height: 48,
 		borderRadius: 16,
 		textTransform: 'capitalize',
 		background: 'rgba(235, 87, 87, 0.9)',
 		color: '#fff',
 		'&:hover': {
 			background: 'rgba(235, 87, 89, 0.9)',
+		},
+		'@media(max-width:767px)': {
+			marginLeft: '5rem',
 		},
 	},
 }));

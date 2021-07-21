@@ -20,7 +20,7 @@ const DisplayRooms = ({ stays }) => {
 
 	return (
 		<main className={classes.main}>
-			<Container>
+			<Container className={classes.container}>
 				<Box className={classes.headingWrapper}>
 					<Typography
 						variant='h1'
@@ -55,6 +55,12 @@ const DisplayRooms = ({ stays }) => {
 export default DisplayRooms;
 
 const useStyles = makeStyles({
+	container: {
+		'@media(max-width:767px)': {
+			paddingLeft: '5px',
+			paddingRight: '5px',
+		},
+	},
 	headingWrapper: {
 		display: 'flex',
 		justifyContent: 'space-between',

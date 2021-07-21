@@ -20,9 +20,9 @@ const Header = ({ clicks }) => {
               
               : '' } */}
 
-			<Container maxWidth='lg'>
+			<Container maxWidth='lg' className={classes.container}>
 				<Toolbar className={classes.navWrapper}>
-					<div>
+					<div className={classes.logo}>
 						<img src={logo} alt='logo' />
 					</div>
 					<SearchBtn click={clicks} />
@@ -35,12 +35,35 @@ const Header = ({ clicks }) => {
 export default Header;
 
 const useStyles = makeStyles({
+	container: {
+		'@media(max-width:767px)': {
+			paddingLeft: '5px',
+			paddingRight: '5px',
+		},
+	},
 	nav: {
 		background: 'transparent',
 		padding: ' 1.5rem 2rem',
 		boxShadow: 'none',
+		'@media(max-width:767px)': {
+			paddingLeft: '5px',
+			paddingRight: '5px',
+		},
 	},
+
 	navWrapper: {
 		justifyContent: 'space-between',
+		'@media(max-width:767px)': {
+			display: 'block',
+			paddingLeft: '5px',
+			paddingRight: '5px',
+			textAlign: 'center',
+		},
+	},
+	logo: {
+		'@media(max-width:767px)': {
+			marginBottom: '3rem',
+			textAlign: 'left',
+		},
 	},
 });

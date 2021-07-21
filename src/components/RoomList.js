@@ -76,6 +76,9 @@ const useStyles = makeStyles({
 		width: '100%',
 		borderRadius: '24px',
 		height: '269px',
+		'@media(max-width:767px)': {
+			width: '100%',
+		},
 	},
 	gridWrapper: {
 		padding: ' 0 2rem',

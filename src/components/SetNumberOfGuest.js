@@ -58,6 +58,12 @@ const useStyles = makeStyles(() => ({
 		left: '24rem',
 		marginTop: '3rem',
 		width: '353px',
+		'@media(max-width:767px)': {
+			marginTop: '2rem',
+			marginLeft: '3rem',
+			width: '353px',
+			left: 0,
+		},
 	},
 	adults: {
 		marginBottom: '2rem',

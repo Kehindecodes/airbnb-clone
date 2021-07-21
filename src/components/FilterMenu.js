@@ -205,6 +205,10 @@ const useStyles = makeStyles((theme) => ({
 		//               transition:'all 0.3s',
 
 		//     }
+		'@media(max-width:767px)': {
+			height: '600px',
+			padding: '5rem 0.5rem',
+		},
 	},
 	overlay: {
 		position: 'absolute',
@@ -214,6 +218,9 @@ const useStyles = makeStyles((theme) => ({
 		width: '100%',
 		backgroundColor: 'rgba(0,0,0,0.5)',
 		zIndex: 2000,
+		'@media(max-width:767px)': {
+			height: '1000px',
+		},
 	},
 	wrapper: {
 		display: 'flex',
@@ -229,11 +236,20 @@ const useStyles = makeStyles((theme) => ({
 		//     color:'#333 !important',
 		//     fontWeight:600
 		// },
+		'@media(max-width:767px)': {
+			display: 'block',
+		},
 	},
 	form: {
 		//   marginLeft:'3rem',
 	},
-	buttonWrapper: {},
+	buttonWrapper: {
+		'@media(max-width:767px)': {
+			position: 'absolute',
+			bottom: '1rem',
+			textAlign: 'center',
+		},
+	},
 	inner_div: {
 		border: 'none',
 		position: 'relative',
@@ -245,6 +261,9 @@ const useStyles = makeStyles((theme) => ({
 		'&:hover': {
 			border: '1px solid #333',
 			borderRadius: 16,
+		},
+		'@media(max-width:767px)': {
+			width: '100%',
 		},
 	},
 	guest_wrapper: {
@@ -258,6 +277,9 @@ const useStyles = makeStyles((theme) => ({
 		'&:hover': {
 			border: '1px solid #333',
 			borderRadius: 16,
+		},
+		'@media(max-width:767px)': {
+			width: '100%',
 		},
 	},
 	button_wrapper: {
