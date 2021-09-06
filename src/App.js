@@ -5,6 +5,7 @@ import DisplayRooms from './components/DisplayRooms';
 import RoomsState from './context/RoomsState';
 import { rooms } from '././stays.json';
 import FilterMenu from './components/FilterMenu';
+import Footer from './components/Footer';
 
 function App() {
 	const [stays, setStays] = useState(rooms);
@@ -88,6 +89,7 @@ function App() {
 				''
 			)}
 			<DisplayRooms stays={stays} onClick={closeFilterMenu} />
+			<Footer />
 		</div>
 	);
 }
