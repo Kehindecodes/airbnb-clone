@@ -9,6 +9,7 @@ import SearchBtn from './SearchBtn';
 import FilterMenu from './FilterMenu';
 import Collapse from '@material-ui/core/Collapse';
 import Zoom from '@material-ui/core/Zoom';
+import OpenFilter from './OpenFilter';
 
 const Header = ({ clicks }) => {
 	const classes = useStyles();
@@ -25,7 +26,8 @@ const Header = ({ clicks }) => {
 					<div className={classes.logo}>
 						<img src={logo} alt='logo' />
 					</div>
-					<SearchBtn click={clicks} />
+					{/* <SearchBtn click={clicks} /> */}
+					<OpenFilter />
 				</Toolbar>
 			</Container>
 		</AppBar>
