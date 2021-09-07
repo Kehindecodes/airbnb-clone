@@ -13,7 +13,7 @@ const RoomList = () => {
 		<Grid container spacing={2} className={classes.gridWrapper}>
 			{React.Children.toArray(
 				stays.map((room) => (
-					<Grid item xs={12} md={6} lg={4}>
+					<Grid item xs={12} sm={6} md={6} lg={4}>
 						<div className={classes.card}>
 							<img src={room.photo} alt={room.title} className={classes.img} />
 						</div>
@@ -71,6 +71,9 @@ const useStyles = makeStyles({
 		width: '365px',
 		height: '269px',
 		marginBottom: '1rem',
+		'@media(min-width:600px)': {
+			width: '320px',
+		},
 		'@media(max-width:767px)': {
 			width: '100%',
 		},
@@ -92,6 +95,9 @@ const useStyles = makeStyles({
 		justifyContent: 'space-between',
 		marginRight: '1rem',
 		width: '365px',
+		'@media(min-width:600px)': {
+			width: '100%',
+		},
 		'@media(max-width:767px)': {
 			width: '100%',
 		},
