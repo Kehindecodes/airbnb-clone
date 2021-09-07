@@ -3,7 +3,7 @@ import { rooms } from '../stays.json';
 import RoomsContext from './roomsContext';
 const RoomsState = (props) => {
 	const [stays, setStays] = useState([]);
-	const [isOpen, setIsOpen] = useState(true);
+	const [isOpen, setIsOpen] = useState(false);
 	const [locationInput, setLocationInput] = useState('');
 	const [count, setCount] = useState(0);
 	const [count2, setCount2] = useState(0);
