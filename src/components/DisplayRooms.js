@@ -1,25 +1,25 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import RoomsContext from '../context/roomsContext';
 import FilterMenu from './FilterMenu';
-import FilterButton from './FilterButton';
 import RoomList from './RoomList';
-const DisplayRooms = ({ stays }) => {
+const DisplayRooms = () => {
 	const classes = useStyles();
-	// const roomsContext = useContext(RoomsContext);
-	// const { getData, data } = roomsContext;
-
-	// useEffect(() => {
-	// 	getData();
-
-	// 	// eslint-disable-next-line
-	// }, []);
+	const roomsContext = useContext(RoomsContext);
+	const { stays, showRooms, closeFilterMenu, isOpen } = roomsContext;
+	// show stays on first render
+	useEffect(() => {
+		showRooms();
+		closeFilterMenu();
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<main className={classes.main}>
+			{isOpen === true ? <FilterMenu /> : ''}
 			<Container className={classes.container}>
 				<Box className={classes.headingWrapper}>
 					<Typography
@@ -34,18 +34,10 @@ const DisplayRooms = ({ stays }) => {
 					</Typography>
 					<Typography
 						style={{ color: '#4f4f4f', fontWeight: 500, fontSize: '14px' }}>
-						12+ stays
+						{stays.length > 12 ? '12+' : stays.length} stays
 					</Typography>
 				</Box>
-				{/* <Button
-					variant='contained'
-					type='submit'
-					className={classes.button}
-					startIcon={<SearchIcon />}
-					onClick={onSearch}>
-					Search
-				</Button> */}
-				{/* <FilterButton onSearch={onSearch} /> */}
+
 				<RoomList stays={stays} />
 			</Container>
 		</main>

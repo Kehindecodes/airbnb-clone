@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import OpenFilter from './OpenFilter';
 
-const Header = ({ clicks, locationInput, totalCount }) => {
+const Header = () => {
 	const classes = useStyles();
 
 	return (
@@ -18,11 +18,7 @@ const Header = ({ clicks, locationInput, totalCount }) => {
 					<div className={classes.logo}>
 						<img src={logo} alt='logo' />
 					</div>
-					<OpenFilter
-						click={clicks}
-						locationInput={locationInput}
-						totalCount={totalCount}
-					/>
+					<OpenFilter />
 				</Toolbar>
 			</Container>
 		</AppBar>

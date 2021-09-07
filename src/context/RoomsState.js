@@ -1,26 +1,78 @@
-import React,{useState} from 'react'
-import RoomsContext from './roomsContext'
+import React, { useState } from 'react';
+import { rooms } from '../stays.json';
+import RoomsContext from './roomsContext';
 const RoomsState = (props) => {
-    const[data,setData]= useState([]);
-    const getData = async () =>{
-        let res = await fetch ('stays.json')
-          let stays =  await res.json()
-            stays.length = 6
-           setData(stays)
-            console.log(stays)
-            console.log(stays.map((stay)=>{
-               return stay.city 
-            }) )
-            
-         
-       }
+	const [stays, setStays] = useState([]);
+	const [isOpen, setIsOpen] = useState(true);
+	const [locationInput, setLocationInput] = useState('');
+	const [count, setCount] = useState(0);
+	const [count2, setCount2] = useState(0);
+	const totalCount = count + count2;
 
-    return (
-        <RoomsContext.Provider value={{data,
-        getData,}}>
-            {props.children}
-        </RoomsContext.Provider>
-    )
-}
+	// display rooms
+	const showRooms = () => {
+		return setStays(rooms);
+	};
+	// show the filter menu
+	const openFilterMenu = () => {
+		setIsOpen(true);
+		console.log('bro it is working ');
+	};
 
-export default RoomsState
+	// hide filter menu
+	const closeFilterMenu = (e) => {
+		setIsOpen(false);
+	};
+	const handleCount = (value) => {
+		setCount(count + value);
+	};
+	const handleCount2 = (value) => {
+		setCount2(count2 + value);
+	};
+	const handleClick = (e) => {
+		setLocationInput(e.target.innerText);
+	};
+	const handleChange = (e) => {
+		setLocationInput(e.target.value);
+	};
+	const onSearch = (e) => {
+		e.preventDefault();
+		console.log(totalCount);
+		// const filterd = filteredRooms.filter((d) => d.maxGuests === 9);
+		const filteredData = rooms.filter(
+			(room) => room.maxGuests === totalCount || room.city === locationInput,
+		);
+
+		console.log(filteredData);
+
+		if (locationInput === '' && totalCount === 0) {
+			setStays(stays);
+		} else {
+			setStays(filteredData);
+			closeFilterMenu();
+		}
+	};
+	return (
+		<RoomsContext.Provider
+			value={{
+				stays,
+				isOpen,
+				openFilterMenu,
+				closeFilterMenu,
+				showRooms,
+				locationInput,
+				count,
+				count2,
+				totalCount,
+				handleClick,
+				handleCount,
+				handleCount2,
+				handleChange,
+				onSearch,
+			}}>
+			{props.children}
+		</RoomsContext.Provider>
+	);
+};
+
+export default RoomsState;

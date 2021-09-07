@@ -1,17 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import { makeStyles } from '@material-ui/core/styles';
+import RoomsContext from '../context/roomsContext';
 
-const RoomList = ({ stays }) => {
+const RoomList = () => {
 	const classes = useStyles();
+	const roomsContext = useContext(RoomsContext);
+	const { stays } = roomsContext;
 
-	// reduce the length of array
-	// let arrLength = stays.length;
-	// if (arrLength > 6) {
-	// 	stays.splice(0, arrLength - 6);
-	// }
-	// stays.length = 6;
 	return (
 		<Grid container spacing={2} className={classes.gridWrapper}>
 			{React.Children.toArray(

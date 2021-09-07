@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { makeStyles } from '@material-ui/core/styles';
-import { rooms } from '../stays.json';
+import RoomsContext from '../context/roomsContext';
 
-const Locations = ({ onclick }) => {
+const Locations = () => {
 	const classes = useStyles();
+	const roomsContext = useContext(RoomsContext);
+	const { stays, handleClick } = roomsContext;
 	// do not display same locations more then once
 	function getUniqueValues(array, property) {
 		const propValues = array.map((element) => element[property]);
@@ -12,15 +14,15 @@ const Locations = ({ onclick }) => {
 		const uniqueValuesArray = [...uniqueValues];
 		return uniqueValuesArray;
 	}
-	const stays = getUniqueValues(rooms, 'city');
+	const rooms = getUniqueValues(stays, 'city');
 
 	return (
 		<div className={classes.locationWrapper}>
 			<ul className={classes.ui}>
 				{React.Children.toArray(
-					stays.map((location) => (
+					rooms.map((location) => (
 						<li className={classes.li}>
-							<LocationOnIcon /> <p onClick={onclick}>{location}</p>
+							<LocationOnIcon /> <p onClick={handleClick}>{location}</p>
 						</li>
 					)),
 				)}
