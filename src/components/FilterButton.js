@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
-const FilterButton = ({ onSearch }) => {
+const FilterButton = () => {
 	const classes = useStyles();
 	return (
 		<Button

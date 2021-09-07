@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@material-ui/core/Box';
 import { Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
-const OpenFilter = ({ click }) => {
-	const [locationInput, setLocationInput] = useState('');
+const OpenFilter = ({ click, locationInput, totalCount }) => {
 	const classes = useStyles();
 	return (
 		<Box className={classes.wrapper} onClick={click}>
@@ -12,7 +11,7 @@ const OpenFilter = ({ click }) => {
 				<div className={classes.location}>
 					<input
 						type='text'
-						value=''
+						value={locationInput && `${locationInput}, Finland`}
 						name='location'
 						className={classes.input}
 						placeholder='Add Location'
@@ -21,7 +20,7 @@ const OpenFilter = ({ click }) => {
 				<div className={classes.guest}>
 					<input
 						type='text'
-						value=''
+						value={totalCount === 0 ? '' : `${totalCount} guests`}
 						name='guest'
 						className={classes.input}
 						placeholder='Add Guest'

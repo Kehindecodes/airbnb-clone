@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,6 +22,9 @@ const RoomList = ({ stays }) => {
 						</div>
 						<div className={classes.prop}>
 							<Typography className={classes.p}>
+								<span className={room.superHost && classes.superhost}>
+									{room.superHost === true ? 'Super Host' : ''}
+								</span>
 								{room.type}
 								{room.beds !== null ? `.${room.beds}beds` : ''}
 							</Typography>
@@ -103,5 +106,14 @@ const useStyles = makeStyles({
 		fontSize: '16px',
 		textAlign: 'left',
 		color: '#333',
+	},
+	superhost: {
+		fontSize: '12px',
+		fontWeight: 700,
+		border: '1px solid #4f4f4f',
+		color: '#4f4f4f',
+		borderRadius: '12px',
+		marginRight: '1rem',
+		padding: '0.3rem',
 	},
 });

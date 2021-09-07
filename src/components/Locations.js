@@ -5,6 +5,7 @@ import { rooms } from '../stays.json';
 
 const Locations = ({ onclick }) => {
 	const classes = useStyles();
+	// do not display same locations more then once
 	function getUniqueValues(array, property) {
 		const propValues = array.map((element) => element[property]);
 		const uniqueValues = new Set(propValues);

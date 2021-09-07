@@ -1,32 +1,11 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
-import {
-	makeStyles,
-	withStyles,
-	createMuiTheme,
-	fade,
-} from '@material-ui/core/styles';
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import SearchIcon from '@material-ui/icons/Search';
+
 import Locations from './Locations';
 import SetNumberOfGuest from './SetNumberOfGuest';
-import RoomsContext from '../context/roomsContext';
+// import RoomsContext from '../context/roomsContext';
 import FilterButton from './FilterButton';
-const theme = createMuiTheme({
-	palette: {
-		primary: {
-			main: '#333',
-		},
-	},
-});
-
-// const Overlay = () =>{
-//     const classes = useStyles();
-
-//     return(
-//
-//     )
-//   }
 
 const FilterMenu = ({
 	onSearch,
@@ -42,16 +21,12 @@ const FilterMenu = ({
 }) => {
 	const classes = useStyles();
 	// const searchInput = useRef(null)
-	const roomsContext = useContext(RoomsContext);
-	const { getData, data } = roomsContext;
+	// const roomsContext = useContext(RoomsContext);
+	// // const { getData, data } = roomsContext;
 
 	const [isFocus, setIsFocus] = useState(false);
 	const [isFocusGuest, setIsFocusGuest] = useState(false);
 
-	// const [numberOfGuest, setNumberOfGuest] = useState(0);
-
-	// console.log(handleCount);
-	// console.log(handleCount2);
 	const onFocus = (e) => {
 		setIsFocus(true);
 		setIsFocusGuest(false);
@@ -69,17 +44,6 @@ const FilterMenu = ({
 	};
 
 	const handleChangeGuest = (e) => {};
-
-	// let total = count + count2;
-	// const getTotal = () => {
-	// 	setNumberOfGuest(total);
-	// };
-
-	// const total = () => {
-
-	// 	setNumberOfGuest(totalCount);
-	// 	console.log(totalCount);
-	// };
 
 	return (
 		<div
@@ -106,17 +70,13 @@ const FilterMenu = ({
 										className={classes.input}
 										onFocus={onFocus}
 										onBlur={onBlur}
-										value={locationInput}
+										value={locationInput && `${locationInput}, Finland`}
 										onChange={handleChange}
 									/>
 								</div>
 							</div>
 
 							<div className={classes.guest_wrapper}>
-								{/* <TextField id="guest-input" label="Guest" variant="filled"
-                             defaultValue='' 
-                             placeholder="Add Guest"
-                               InputProps={{ classes, disableUnderline: true }} /> */}
 								<label htmlFor='guest' className={classes.label}>
 									Guest
 								</label>
@@ -128,20 +88,12 @@ const FilterMenu = ({
 									className={classes.input}
 									onFocus={onFocusGuest}
 									onBlur={onBlurGuest}
-									value={totalCount}
+									value={totalCount === 0 ? '' : `${totalCount} guests`}
 									onChange={handleChangeGuest}
 								/>
 							</div>
 							<div className={classes.buttonWrapper}>
-								{/* <Button
-									variant='contained'
-									type='submit'
-									className={classes.button}
-									startIcon={<SearchIcon />}
-									onClick={onSearch}>
-									Search
-								</Button> */}
-								<FilterButton />
+								<FilterButton onclick={onSearch} />
 							</div>
 						</div>
 					</form>
@@ -167,17 +119,6 @@ const FilterMenu = ({
 export default FilterMenu;
 
 const useStyles = makeStyles((theme) => ({
-	' @keyframes fadeInDownBig': {
-		'0%': {
-			opacity: 0,
-			transform: 'translate3d(0, -2000px, 0)',
-		},
-
-		'100%': {
-			opacity: 1,
-			transform: 'translate3d(0, 0, 0)',
-		},
-	},
 	filterWrapper: {
 		position: 'absolute',
 		display: 'block',
@@ -191,35 +132,21 @@ const useStyles = makeStyles((theme) => ({
 		padding: '5rem',
 		animation: 'fadeInDownBig',
 
-		//    '&::before':{
-		//               content:"",
-		//               backgroundColor: 'rgba(0, 0, 0, 0.9)',
-		//               position:"absolute",
-		//               left:0,
-		//               top:"200px",
-		//               height:"100vh",
-		//               opacity:1,
-		//               width:"100%",
-		//               display:"block",
-		//               visibility:"visible",
-		//               transition:'all 0.3s',
-
-		//     }
 		'@media(max-width:767px)': {
 			height: '600px',
 			padding: '5rem 0.5rem',
 		},
 	},
 	overlay: {
-		position: 'absolute',
+		position: 'fixed',
 		top: 0,
 		left: 0,
-		height: '100%',
-		width: '100%',
+		height: '100vh',
+		width: '100vw',
 		backgroundColor: 'rgba(0,0,0,0.5)',
 		zIndex: 2000,
 		'@media(max-width:767px)': {
-			height: '1000px',
+			height: '100vh',
 		},
 	},
 	wrapper: {
@@ -228,14 +155,7 @@ const useStyles = makeStyles((theme) => ({
 		boxShadow: '0px 1px 6px rgba(0, 0, 0, 0.1)',
 		border: '1px solid #F2F2F2',
 		borderRadius: 16,
-		// height:"60px",
-		//   border:'1px solid #000',
-		//   borderRadius: 16,
-		//   boxShadow: `${fade(theme.palette.primary.main, 0.1)} 0 0 0 2px`,
-		//   '.MuiFormLabel-root':{
-		//     color:'#333 !important',
-		//     fontWeight:600
-		// },
+
 		'@media(max-width:767px)': {
 			display: 'block',
 		},
@@ -327,16 +247,3 @@ const useStyles = makeStyles((theme) => ({
 		position: 'relative',
 	},
 }));
-
-// const StyledtextField = withStyles({
-//     root:{
-//         backgroundColor:"#ffffff"
-//     },
-//     input:{
-//         border:'1px solid #78648',
-//       '&::after':{
-//           borderBottom:'none'
-//       }
-//     }
-
-// })(TextField)

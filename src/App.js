@@ -1,8 +1,7 @@
-import react, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import DisplayRooms from './components/DisplayRooms';
-import RoomsState from './context/RoomsState';
 import { rooms } from '././stays.json';
 import FilterMenu from './components/FilterMenu';
 import Footer from './components/Footer';
@@ -21,8 +20,6 @@ function App() {
 	};
 	const handleCount2 = (value) => {
 		setCount2(count2 + value);
-		// setNumberOfGuest(count);
-		// console.log(count2);
 	};
 	const handleClick = (e) => {
 		setLocationInput(e.target.innerText);
@@ -30,11 +27,6 @@ function App() {
 	const handleChange = (e) => {
 		setLocationInput(e.target.value);
 	};
-
-	// useEffect(() => {
-	// 	filteredRooms.length = 6;
-	// }, []);
-
 	const openFilterMenu = () => {
 		setIsOpen(true);
 		console.log('bro it is working ');
@@ -44,14 +36,6 @@ function App() {
 		setIsOpen(false);
 	};
 
-	// useEffect(() => {
-	// 	document.addEventListener('click', closeFilterMenu);
-
-	// 	// clean up
-	// 	return () => {
-	// 		document.removeEventListener('click', closeFilterMenu);
-	// 	};
-	// }, [ref]);
 	console.log(rooms);
 	const onSearch = (e) => {
 		e.preventDefault();
@@ -67,11 +51,16 @@ function App() {
 			setStays(stays);
 		} else {
 			setStays(filteredData);
+			closeFilterMenu();
 		}
 	};
 	return (
 		<div>
-			<Header clicks={openFilterMenu} />
+			<Header
+				clicks={openFilterMenu}
+				locationInput={locationInput}
+				totalCount={totalCount}
+			/>
 			{isOpen === true ? (
 				<FilterMenu
 					onSearch={onSearch}
