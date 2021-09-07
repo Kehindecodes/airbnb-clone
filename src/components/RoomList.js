@@ -74,6 +74,9 @@ const useStyles = makeStyles({
 		width: '365px',
 		height: '269px',
 		marginBottom: '1rem',
+		'@media(max-width:767px)': {
+			width: '100%',
+		},
 	},
 	img: {
 		width: '100%',
@@ -91,6 +94,10 @@ const useStyles = makeStyles({
 		display: 'flex',
 		justifyContent: 'space-between',
 		marginRight: '1rem',
+		width: '365px',
+		'@media(max-width:767px)': {
+			width: '100%',
+		},
 	},
 	p: {
 		fontWeight: 500,

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-
+import CloseIcon from '@material-ui/icons/Close';
 import Locations from './Locations';
 import SetNumberOfGuest from './SetNumberOfGuest';
 // import RoomsContext from '../context/roomsContext';
 import FilterButton from './FilterButton';
+import { Button } from '@material-ui/core';
 
 const FilterMenu = ({
 	onSearch,
@@ -55,6 +56,27 @@ const FilterMenu = ({
 				className={classes.filterWrapper}
 				onClick={(e) => e.stopPropagation()}>
 				<Box>
+					<div className={classes.title}>
+						<p>Edit Your Search</p>
+						<button
+							onClick={close}
+							style={{
+								border: 'none',
+								backgroundColor: 'transparent',
+								cursor: 'pointer',
+								// '&:hover': {
+
+								// },
+							}}>
+							<CloseIcon
+								style={{
+									color: ' #333',
+									width: '20px',
+									height: '20px',
+								}}
+							/>
+						</button>
+					</div>
 					<form className={classes.form} onSubmit={onSearch}>
 						<div className={classes.wrapper}>
 							<div className='locationWrapper'>
@@ -97,7 +119,9 @@ const FilterMenu = ({
 							</div>
 						</div>
 					</form>
-					{isFocus === true ? <Locations onclick={handleClick} /> : ''}
+					<div>
+						{isFocus === true ? <Locations onclick={handleClick} /> : ''}
+					</div>
 				</Box>
 				<div className={classes.resultWrapper}>
 					{isFocusGuest === true ? (
@@ -134,7 +158,8 @@ const useStyles = makeStyles((theme) => ({
 
 		'@media(max-width:767px)': {
 			height: '600px',
-			padding: '5rem 0.5rem',
+			padding: '2rem 0.5rem',
+			width: '100%',
 		},
 	},
 	overlay: {
@@ -158,18 +183,13 @@ const useStyles = makeStyles((theme) => ({
 
 		'@media(max-width:767px)': {
 			display: 'block',
+			height: '113px',
 		},
 	},
 	form: {
 		//   marginLeft:'3rem',
 	},
-	buttonWrapper: {
-		'@media(max-width:767px)': {
-			position: 'absolute',
-			bottom: '1rem',
-			textAlign: 'center',
-		},
-	},
+
 	inner_div: {
 		border: 'none',
 		position: 'relative',
@@ -190,6 +210,7 @@ const useStyles = makeStyles((theme) => ({
 		border: '1px solid #F2F2F2',
 		position: 'relative',
 		width: '353px',
+		fontWeight: 400,
 
 		//  height:'40px',
 		padding: '7px 16px ',
@@ -200,6 +221,7 @@ const useStyles = makeStyles((theme) => ({
 		},
 		'@media(max-width:767px)': {
 			width: '100%',
+			borderBottom: 'none',
 		},
 	},
 	button_wrapper: {
@@ -215,19 +237,17 @@ const useStyles = makeStyles((theme) => ({
 			borderRadius: 16,
 		},
 	},
-	button: {
-		marginRight: '9rem',
-		marginLeft: '10rem',
-		marginTop: '0.5rem',
-		width: 126,
-		borderRadius: 16,
-		textTransform: 'capitalize',
-		background: 'rgba(235, 87, 87, 0.9)',
-		color: '#fff',
-		'&:hover': {
-			background: 'rgba(235, 87, 89, 0.9)',
+	buttonWrapper: {
+		'@media(max-width:767px)': {
+			marginRight: 'auto',
+			marginLeft: 'auto',
+			position: 'absolute',
+			bottom: '2rem',
+			textAlign: 'center',
+			width: '100%',
 		},
 	},
+
 	input: {
 		border: 'none',
 		outline: '0',
@@ -241,9 +261,23 @@ const useStyles = makeStyles((theme) => ({
 		fontWeight: 800,
 		textTransform: 'uppercase',
 		color: '#333',
+		fontSize: '9px',
 		// transform:'translate(16px, 0) scale(1)'
 	},
 	resultWrapper: {
 		position: 'relative',
+		'@media(max-width:767px)': {
+			display: 'flex',
+		},
+	},
+	title: {
+		display: 'none',
+		fontSize: '12px',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		marginBottom: '1.5rem',
+		'@media(max-width:767px)': {
+			display: 'flex',
+		},
 	},
 }));

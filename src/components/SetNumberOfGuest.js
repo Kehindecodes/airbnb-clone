@@ -60,7 +60,7 @@ const useStyles = makeStyles(() => ({
 		width: '353px',
 		'@media(max-width:767px)': {
 			marginTop: '2rem',
-			marginLeft: '3rem',
+			marginLeft: '2rem',
 			width: '353px',
 			left: 0,
 		},

@@ -51,6 +51,9 @@ const useStyles = makeStyles({
 		boxShadow: '0px 1px 6px rgba(0, 0, 0, 0.1)',
 		borderRadius: '16px',
 		cursor: 'pointer',
+		'@media(max-width:767px)': {
+			width: '100%',
+		},
 	},
 	form: {
 		display: 'flex',

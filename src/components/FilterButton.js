@@ -21,6 +21,7 @@ const useStyles = makeStyles(() => ({
 		marginRight: '9rem',
 		marginLeft: '10rem',
 		marginTop: '0.5rem',
+		marginBottom: '0.5rem',
 		width: 126,
 		height: 48,
 		borderRadius: 16,
@@ -31,7 +32,7 @@ const useStyles = makeStyles(() => ({
 			background: 'rgba(235, 87, 89, 0.9)',
 		},
 		'@media(max-width:767px)': {
-			marginLeft: '5rem',
+			margin: 0,
 		},
 	},
 }));

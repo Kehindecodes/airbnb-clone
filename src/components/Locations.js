@@ -39,6 +39,9 @@ const useStyles = makeStyles(() => ({
 		marginTop: '2rem',
 		marginLeft: '3rem',
 		width: '353px',
+		'@media(max-width:767px)': {
+			marginLeft: '2rem',
+		},
 	},
 	ui: {
 		listStyle: 'none',
