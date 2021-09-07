@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Box from '@material-ui/core/Box';
 import { Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
-const OpenFilter = ({ click, locationInput, totalCount }) => {
+import RoomsContext from '../context/roomsContext';
+const OpenFilter = () => {
 	const classes = useStyles();
+	const roomsContext = useContext(RoomsContext);
+	const { openFilterMenu, locationInput, totalCount } = roomsContext;
 	return (
-		<Box className={classes.wrapper} onClick={click}>
+		<Box className={classes.wrapper} onClick={openFilterMenu}>
 			<form className={classes.form}>
 				<div className={classes.location}>
 					<input
@@ -15,6 +18,7 @@ const OpenFilter = ({ click, locationInput, totalCount }) => {
 						name='location'
 						className={classes.input}
 						placeholder='Add Location'
+						onChange={(e) => e.target.value}
 					/>
 				</div>
 				<div className={classes.guest}>
@@ -24,6 +28,7 @@ const OpenFilter = ({ click, locationInput, totalCount }) => {
 						name='guest'
 						className={classes.input}
 						placeholder='Add Guest'
+						onChange={(e) => e.target.value}
 					/>
 				</div>
 			</form>

@@ -1,4 +1,4 @@
 import { createContext } from 'react';
-const roomsContext = createContext({data:[]});
+const roomsContext = createContext();
 
 export default roomsContext;

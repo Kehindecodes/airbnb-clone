@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import CloseIcon from '@material-ui/icons/Close';
@@ -6,28 +6,16 @@ import Locations from './Locations';
 import SetNumberOfGuest from './SetNumberOfGuest';
 // import RoomsContext from '../context/roomsContext';
 import FilterButton from './FilterButton';
-import { Button } from '@material-ui/core';
+import RoomsContext from '../context/roomsContext';
 
-const FilterMenu = ({
-	onSearch,
-	totalCount,
-	count,
-	count2,
-	locationInput,
-	handleCount,
-	handleCount2,
-	handleChange,
-	handleClick,
-	close,
-}) => {
+const FilterMenu = () => {
+	const roomsContext = useContext(RoomsContext);
+	const { onSearch, totalCount, locationInput, handleChange, closeFilterMenu } =
+		roomsContext;
 	const classes = useStyles();
-	// const searchInput = useRef(null)
-	// const roomsContext = useContext(RoomsContext);
-	// // const { getData, data } = roomsContext;
 
 	const [isFocus, setIsFocus] = useState(false);
 	const [isFocusGuest, setIsFocusGuest] = useState(false);
-
 	const onFocus = (e) => {
 		setIsFocus(true);
 		setIsFocusGuest(false);
@@ -43,14 +31,15 @@ const FilterMenu = ({
 	const onBlurGuest = () => {
 		setIsFocus(false);
 	};
-
-	const handleChangeGuest = (e) => {};
+	const handleGuest = (e) => {
+		return e.target.value;
+	};
 
 	return (
 		<div
 			className={classes.overlay}
 			onClick={() => {
-				close();
+				closeFilterMenu();
 			}}>
 			<div
 				className={classes.filterWrapper}
@@ -59,14 +48,11 @@ const FilterMenu = ({
 					<div className={classes.title}>
 						<p>Edit Your Search</p>
 						<button
-							onClick={close}
+							onClick={closeFilterMenu}
 							style={{
 								border: 'none',
 								backgroundColor: 'transparent',
 								cursor: 'pointer',
-								// '&:hover': {
-
-								// },
 							}}>
 							<CloseIcon
 								style={{
@@ -111,7 +97,7 @@ const FilterMenu = ({
 									onFocus={onFocusGuest}
 									onBlur={onBlurGuest}
 									value={totalCount === 0 ? '' : `${totalCount} guests`}
-									onChange={handleChangeGuest}
+									onChange={handleGuest}
 								/>
 							</div>
 							<div className={classes.buttonWrapper}>
@@ -119,21 +105,10 @@ const FilterMenu = ({
 							</div>
 						</div>
 					</form>
-					<div>
-						{isFocus === true ? <Locations onclick={handleClick} /> : ''}
-					</div>
+					<div>{isFocus === true ? <Locations /> : ''}</div>
 				</Box>
 				<div className={classes.resultWrapper}>
-					{isFocusGuest === true ? (
-						<SetNumberOfGuest
-							count={count}
-							count2={count2}
-							handleCount={handleCount}
-							handleCount2={handleCount2}
-						/>
-					) : (
-						''
-					)}
+					{isFocusGuest === true ? <SetNumberOfGuest /> : ''}
 				</div>
 			</div>
 		</div>

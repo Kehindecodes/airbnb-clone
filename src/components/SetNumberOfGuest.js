@@ -1,22 +1,14 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CounterBtn from './CounterBtn';
 import CounterBtn2 from './CounterBtn2';
+import RoomsContext from '../context/roomsContext';
 
-const SetNumberOfGuest = ({ count, count2, handleCount, handleCount2 }) => {
+const SetNumberOfGuest = () => {
+	const roomsContext = useContext(RoomsContext);
 	const classes = useStyles();
-	// const [count, setCount] = useState(0);
-	// const [count2, setCount2] = useState(0);
-	// const handleCount = (value) => {
-	// 	setCount(count + value);
-	// 	console.log(count);
-	// };
-	// const handleCount2 = (value) => {
-	// 	setCount2(count2 + value);
-	// 	console.log(count2);
-	// };
-
+	const { count, count2, handleCount, handleCount2 } = roomsContext;
 	return (
 		<div className={classes.counterWrapper}>
 			<div className={classes.adults}>
