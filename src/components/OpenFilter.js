@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@material-ui/core/Box';
 import { Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
-const OpenFilter = () => {
+const OpenFilter = ({ click }) => {
+	const [locationInput, setLocationInput] = useState('');
 	const classes = useStyles();
 	return (
-		<Box className={classes.wrapper}>
+		<Box className={classes.wrapper} onClick={click}>
 			<form className={classes.form}>
 				<div className={classes.location}>
 					<input
 						type='text'
-						value='Helsinki, Finland'
+						value=''
 						name='location'
 						className={classes.input}
+						placeholder='Add Location'
 					/>
 				</div>
 				<div className={classes.guest}>
