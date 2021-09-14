@@ -71,7 +71,7 @@ const useStyles = makeStyles({
 		width: '365px',
 		height: '269px',
 		marginBottom: '1rem',
-		'@media(min-width:600px)': {
+		'@media(min-width:768px)': {
 			width: '320px',
 		},
 		'@media(max-width:767px)': {
@@ -95,8 +95,8 @@ const useStyles = makeStyles({
 		justifyContent: 'space-between',
 		marginRight: '1rem',
 		width: '365px',
-		'@media(min-width:600px)': {
-			width: '100%',
+		'@media(min-width:768px)': {
+			width: '320px',
 		},
 		'@media(max-width:767px)': {
 			width: '100%',

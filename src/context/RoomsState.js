@@ -16,7 +16,7 @@ const RoomsState = (props) => {
 	// show the filter menu
 	const openFilterMenu = () => {
 		setIsOpen(true);
-		console.log('bro it is working ');
+	
 	};
 
 	// hide filter menu
@@ -37,7 +37,6 @@ const RoomsState = (props) => {
 	};
 	const onSearch = (e) => {
 		e.preventDefault();
-		console.log(totalCount);
 		// const filterd = filteredRooms.filter((d) => d.maxGuests === 9);
 		const filteredData = rooms.filter(
 			(room) => room.maxGuests === totalCount || room.city === locationInput,
